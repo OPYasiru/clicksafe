@@ -1,0 +1,6 @@
+{
+  "name": "SafeClick Tech Blogger Theme",
+  "description": "A modern, responsive Blogger/Blogspot XML theme generator and interactive live design simulator for SafeClick Tech science and tech security guides.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
