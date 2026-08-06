@@ -2,7 +2,8 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ෆෝන් එකේ Zoom වෙන එක නවත්වන්න විශේෂ meta tag එකක් -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Surprise! ❤️</title>
     <style>
         body {
@@ -11,23 +12,25 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #ffe6e6; /* ලා රෝස පැහැති පසුබිම */
+            margin: 0;
+            background-color: #ffe6e6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            overflow: hidden;
+            overflow: hidden; /* Screen එක Scroll වෙන එක නවත්වයි */
         }
         h1 { 
             color: #d63031; 
-            margin-bottom: 30px;
+            margin: 0 20px 30px 20px;
+            font-size: 24px;
         }
         .btn-container {
             position: relative;
-            width: 300px;
-            height: 100px;
+            width: 100%;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 15px; /* Button දෙක අතර පරතරය */
         }
         button {
             font-size: 18px;
@@ -36,20 +39,22 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.1s;
         }
         #yes-btn {
             background-color: #2ecc71;
             color: white;
+            z-index: 10;
         }
-        #yes-btn:hover {
+        #yes-btn:active {
             background-color: #27ae60;
+            transform: scale(0.95);
         }
         #no-btn {
             background-color: #e74c3c;
             color: white;
-            position: absolute;
+            z-index: 5;
         }
     </style>
 </head>
@@ -58,21 +63,22 @@
     <h1 id="question">අපි ළඟදිම Galle පැත්තේ ලස්සන Date එකක් යමුද? 🌊❤️</h1>
     
     <div class="btn-container" id="btn-container">
-        <button id="yes-btn" onclick="sayYes()">ඔව්, අනිවාර්යයෙන්! 😍</button>
-        <button id="no-btn" onmouseover="moveNoBtn()" onclick="moveNoBtn()">බෑ 😢</button>
+        <button id="yes-btn" onclick="sayYes()">ඔව් 😍</button>
+        <!-- Mobile වලට ontouchstart එකතු කර ඇත -->
+        <button id="no-btn" onmouseover="moveNoBtn()" ontouchstart="moveNoBtn()" onclick="moveNoBtn()">බෑ 😢</button>
     </div>
 
     <script>
         function moveNoBtn() {
             const noBtn = document.getElementById('no-btn');
             
-            // Screen එකේ Button එක යන්න පුළුවන් සීමාවන්
-            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+            // Button එක Screen එකෙන් එළියට නොයන විදිහට සීමා කිරීම
+            const padding = 20;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
             
-            // අහඹු ස්ථානයක් තෝරාගැනීම
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
+            const x = Math.max(padding, Math.random() * maxX);
+            const y = Math.max(padding, Math.random() * maxY);
             
             noBtn.style.position = 'fixed';
             noBtn.style.left = `${x}px`;
@@ -86,6 +92,10 @@
             // පසුබිම වෙනස් කිරීම
             document.body.style.backgroundColor = "#fd79a8";
             document.getElementById('question').style.color = "#ffffff";
+            
+            // Fireworks වගේ පොඩි effect එකක් (Optional)
+            const noBtn = document.getElementById('no-btn');
+            if(noBtn) noBtn.remove();
         }
     </script>
 
