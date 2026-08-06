@@ -1,13 +1,93 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise! ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe6e6; /* ලා රෝස පැහැති පසුබිම */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 { 
+            color: #d63031; 
+            margin-bottom: 30px;
+        }
+        .btn-container {
+            position: relative;
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #yes-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        #yes-btn:hover {
+            background-color: #27ae60;
+        }
+        #no-btn {
+            background-color: #e74c3c;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
 
+    <h1 id="question">අපි ළඟදිම Galle පැත්තේ ලස්සන Date එකක් යමුද? 🌊❤️</h1>
+    
+    <div class="btn-container" id="btn-container">
+        <button id="yes-btn" onclick="sayYes()">ඔව්, අනිවාර්යයෙන්! 😍</button>
+        <button id="no-btn" onmouseover="moveNoBtn()" onclick="moveNoBtn()">බෑ 😢</button>
+    </div>
+
+    <script>
+        function moveNoBtn() {
+            const noBtn = document.getElementById('no-btn');
+            
+            // Screen එකේ Button එක යන්න පුළුවන් සීමාවන්
+            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+            
+            // අහඹු ස්ථානයක් තෝරාගැනීම
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function sayYes() {
+            document.getElementById('question').innerText = "යේ! ලෑස්ති වෙලා ඉන්න එහෙනම්! 🥰🎉";
+            document.getElementById('btn-container').style.display = 'none';
+            
+            // පසුබිම වෙනස් කිරීම
+            document.body.style.backgroundColor = "#fd79a8";
+            document.getElementById('question').style.color = "#ffffff";
+        }
+    </script>
+
+</body>
+</html>
